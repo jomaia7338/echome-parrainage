@@ -51,7 +51,6 @@
     input { width: 100%; padding: 16px; border: 2px solid #f0f0f0; border-radius: 12px; margin-bottom: 20px; font-size: 1rem; }
     input:focus { border-color: var(--brand-cyan); outline: none; }
     
-    /* CASE RGPD */
     .rgpd-container { margin: 25px 0; text-align: left; }
     .rgpd-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 0.85rem; color: #555; line-height: 1.4; }
     .rgpd-label input { width: 18px; height: 18px; margin: 0; margin-top: 2px; accent-color: var(--brand-cyan); cursor: pointer; }
@@ -60,7 +59,6 @@
     .btn-submit:hover { background: var(--brand-cyan); }
     .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
-    /* CONTENU REASSURANCE */
     .section-content { padding: 80px 0; }
     .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 900; }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
@@ -108,14 +106,12 @@
               <div><label>Nom de votre proche *</label><input type="text" name="nom_proche" required></div>
               <div><label>Téléphone de votre proche *</label><input type="tel" name="tel_proche" placeholder="06 00 00 00 00" required></div>
             </div>
-            
             <div class="rgpd-container">
                 <label class="rgpd-label">
                     <input type="checkbox" name="rgpd_consent" required>
                     <span>Je confirme avoir l'accord de mon proche pour transmettre ses coordonnées et j'accepte la politique de confidentialité d'EC(H)OME ENERGIES.</span>
                 </label>
             </div>
-            
             <button type="submit" class="btn-submit">Valider le parrainage</button>
           </form>
         </div>
@@ -128,14 +124,12 @@
             </div>
             <label>Qui vous a parrainé ? (Nom du client Echome) *</label>
             <input type="text" name="nom_du_parrain" required>
-
             <div class="rgpd-container">
                 <label class="rgpd-label">
                     <input type="checkbox" name="rgpd_consent" required>
                     <span>J'accepte que mes données soient traitées par EC(H)OME ENERGIES pour la gestion de ma demande de parrainage.</span>
                 </label>
             </div>
-
             <button type="submit" class="btn-submit">Demander mon étude gratuite</button>
           </form>
         </div>
@@ -159,14 +153,14 @@
       <div class="footer-grid">
         <div><h4>Coordonnées</h4><p>1159 rue de la Galandrine<br>38210 Saint-Quentin-sur-Isère</p></div>
         <div><h4>Légal</h4><p>RCS Grenoble 980 109 755<br>SAS au capital de 20 000€</p></div>
-        <div><h4>Contact</h4><p>04 76 37 34 62<br><a href="mailto:contact@echomeenergies.fr">Nous contacter</a></p></div>
+        <div><h4>Contact</h4><p>04 76 37 34 62<br><a href="mailto:contact@echome-energies.fr">Nous contacter</a></p></div>
       </div>
       <p style="margin-top:50px; text-align:center;">© 2026 EC(H)OME ENERGIES — <a href="reglement-parrainage-Echome-Energies.pdf" target="_blank">Règlement complet</a></p>
     </div>
   </footer>
 
   <script>
-    // 1. GESTION DU CHANGEMENT DE FORMULAIRE
+    // 1. Changement de formulaire (Tabulations)
     function switchForm(id, el) {
       document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -174,47 +168,45 @@
       el.classList.add('active');
     }
 
-    // 2. VALIDATION TELEPHONE ET ENVOI SANS RECHARGER (GRATUIT)
-    function validatePhone(phone) {
-      // Regex pour vérifier 10 chiffres commençant par 06 ou 07 (autorise les espaces)
-      const cleaned = phone.replace(/\s/g, ''); // On enlève les espaces pour compter
+    // 2. Validation téléphone et Redirection automatique (Gratuit)
+    const forms = ["form-parrain", "form-filleul"];
+    
+    function isValidFrenchMobile(phone) {
+      const cleaned = phone.replace(/\s/g, ''); // Enlever les espaces
       return /^(06|07)[0-9]{8}$/.test(cleaned);
     }
 
-    const formIds = ["form-parrain", "form-filleul"];
-    
-    formIds.forEach(id => {
-      const form = document.getElementById(id);
-      if (!form) return;
+    forms.forEach(id => {
+      const f = document.getElementById(id);
+      if (!f) return;
 
-      form.addEventListener("submit", async function(event) {
-        event.preventDefault(); // On bloque l'envoi classique
+      f.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Bloque l'envoi normal pour rester sur la page
         
-        const formData = new FormData(event.target);
-        
-        // On vérifie tous les champs de type "tel" présents dans le formulaire envoyé
-        let isPhoneValid = true;
-        form.querySelectorAll('input[type="tel"]').forEach(input => {
-          if (!validatePhone(input.value)) {
-            isPhoneValid = false;
+        // Vérification des téléphones avant envoi
+        const telFields = f.querySelectorAll('input[type="tel"]');
+        let error = false;
+        telFields.forEach(field => {
+          if(!isValidFrenchMobile(field.value)) {
+            error = true;
           }
         });
 
-        if (!isPhoneValid) {
-          alert("Veuillez entrer un numéro de mobile valide commençant par 06 ou 07 (10 chiffres).");
+        if(error) {
+          alert("Veuillez entrer un numéro de mobile valide (commençant par 06 ou 07 et 10 chiffres au total).");
           return;
         }
 
-        // Effet visuel sur le bouton
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.innerText = "Envoi en cours...";
+        const btn = f.querySelector('button');
+        btn.disabled = true;
+        btn.innerText = "Envoi en cours...";
 
-        // Envoi via AJAX (fetch)
+        // Envoi des données en arrière-plan (AJAX)
+        const data = new FormData(f);
         try {
-          const response = await fetch(event.target.action, {
+          const response = await fetch(f.action, {
             method: 'POST',
-            body: formData,
+            body: data,
             headers: { 'Accept': 'application/json' }
           });
 
@@ -222,14 +214,13 @@
             // REDIRECTION MANUELLE VERS VOTRE PAGE SUCCÈS
             window.location.href = "https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html";
           } else {
-            alert("Erreur lors de l'envoi. Veuillez vérifier que votre boîte mail est confirmée sur Formspree.");
-            submitButton.disabled = false;
-            submitButton.innerText = "Valider";
+            alert("Erreur de confirmation : Vérifiez vos emails (Spams) pour valider votre compte Formspree.");
+            btn.disabled = false;
+            btn.innerText = "Valider";
           }
-        } catch (error) {
-          alert("Erreur de connexion réseau.");
-          submitButton.disabled = false;
-          submitButton.innerText = "Valider";
+        } catch (e) {
+          alert("Erreur réseau.");
+          btn.disabled = false;
         }
       });
     });
