@@ -57,7 +57,6 @@
 
     .btn-submit { width: 100%; background: var(--dark); color: white; padding: 20px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; }
     .btn-submit:hover { background: var(--brand-cyan); }
-    .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
     .section-content { padding: 80px 0; }
     .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 900; }
@@ -96,7 +95,9 @@
         </div>
 
         <div id="parrain" class="form-panel active">
-          <form id="form-parrain" action="https://formspree.io/f/xojpdlkn" method="POST">
+          <form action="https://formspree.io/f/xojpdlkn" method="POST">
+            <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
+            
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom_parrain" required></div>
               <div><label>Votre Téléphone *</label><input type="tel" name="tel_parrain" placeholder="06 00 00 00 00" required></div>
@@ -106,30 +107,36 @@
               <div><label>Nom de votre proche *</label><input type="text" name="nom_proche" required></div>
               <div><label>Téléphone de votre proche *</label><input type="tel" name="tel_proche" placeholder="06 00 00 00 00" required></div>
             </div>
+            
             <div class="rgpd-container">
                 <label class="rgpd-label">
                     <input type="checkbox" name="rgpd_consent" required>
                     <span>Je confirme avoir l'accord de mon proche pour transmettre ses coordonnées et j'accepte la politique de confidentialité d'EC(H)OME ENERGIES.</span>
                 </label>
             </div>
+            
             <button type="submit" class="btn-submit">Valider le parrainage</button>
           </form>
         </div>
 
         <div id="filleul" class="form-panel">
-          <form id="form-filleul" action="https://formspree.io/f/xojpdlkn" method="POST">
+          <form action="https://formspree.io/f/xojpdlkn" method="POST">
+            <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
+            
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom" required></div>
               <div><label>Votre Téléphone *</label><input type="tel" name="tel" placeholder="06 00 00 00 00" required></div>
             </div>
             <label>Qui vous a parrainé ? (Nom du client Echome) *</label>
             <input type="text" name="nom_du_parrain" required>
+
             <div class="rgpd-container">
                 <label class="rgpd-label">
                     <input type="checkbox" name="rgpd_consent" required>
                     <span>J'accepte que mes données soient traitées par EC(H)OME ENERGIES pour la gestion de ma demande de parrainage.</span>
                 </label>
             </div>
+
             <button type="submit" class="btn-submit">Demander mon étude gratuite</button>
           </form>
         </div>
@@ -160,7 +167,7 @@
   </footer>
 
   <script>
-    // 1. Changement de formulaire (Tabulations)
+    // Gestion des onglets
     function switchForm(id, el) {
       document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -168,61 +175,24 @@
       el.classList.add('active');
     }
 
-    // 2. Validation téléphone et Redirection automatique (Gratuit)
-    const forms = ["form-parrain", "form-filleul"];
-    
-    function isValidFrenchMobile(phone) {
-      const cleaned = phone.replace(/\s/g, ''); // Enlever les espaces
-      return /^(06|07)[0-9]{8}$/.test(cleaned);
-    }
-
-    forms.forEach(id => {
-      const f = document.getElementById(id);
-      if (!f) return;
-
-      f.addEventListener("submit", async function(event) {
-        event.preventDefault(); // Bloque l'envoi normal pour rester sur la page
+    // Validation du numéro de téléphone (bloque si pas 06 ou 07)
+    document.querySelectorAll('form').forEach(form => {
+      form.onsubmit = function(e) {
+        const telInputs = form.querySelectorAll('input[type="tel"]');
+        let isValid = true;
         
-        // Vérification des téléphones avant envoi
-        const telFields = f.querySelectorAll('input[type="tel"]');
-        let error = false;
-        telFields.forEach(field => {
-          if(!isValidFrenchMobile(field.value)) {
-            error = true;
+        telInputs.forEach(input => {
+          const val = input.value.replace(/\s/g, ''); // On enlève les espaces
+          if (!/^(06|07)[0-9]{8}$/.test(val)) {
+            alert("Veuillez entrer un numéro de mobile valide (commençant par 06 ou 07, 10 chiffres).");
+            isValid = false;
           }
         });
 
-        if(error) {
-          alert("Veuillez entrer un numéro de mobile valide (commençant par 06 ou 07 et 10 chiffres au total).");
-          return;
+        if (!isValid) {
+          e.preventDefault(); // On ne lance pas l'envoi
         }
-
-        const btn = f.querySelector('button');
-        btn.disabled = true;
-        btn.innerText = "Envoi en cours...";
-
-        // Envoi des données en arrière-plan (AJAX)
-        const data = new FormData(f);
-        try {
-          const response = await fetch(f.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (response.ok) {
-            // REDIRECTION MANUELLE VERS VOTRE PAGE SUCCÈS
-            window.location.href = "https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html";
-          } else {
-            alert("Erreur de confirmation : Vérifiez vos emails (Spams) pour valider votre compte Formspree.");
-            btn.disabled = false;
-            btn.innerText = "Valider";
-          }
-        } catch (e) {
-          alert("Erreur réseau.");
-          btn.disabled = false;
-        }
-      });
+      };
     });
   </script>
 </body>
