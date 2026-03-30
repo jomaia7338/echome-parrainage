@@ -58,6 +58,7 @@
 
     .btn-submit { width: 100%; background: var(--dark); color: white; padding: 20px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; }
     .btn-submit:hover { background: var(--brand-cyan); }
+    .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
     /* CONTENU REASSURANCE */
     .section-content { padding: 80px 0; }
@@ -97,16 +98,15 @@
         </div>
 
         <div id="parrain" class="form-panel active">
-          <form action="https://formspree.io/f/xojpdlkn" method="POST">
-            <input type="hidden" name="_next" value="parrainage-succes.html">
+          <form id="form-parrain" action="https://formspree.io/f/xojpdlkn" method="POST">
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom_parrain" required></div>
-              <div><label>Votre Téléphone *</label><input type="tel" name="tel_parrain" required></div>
+              <div><label>Votre Téléphone *</label><input type="tel" name="tel_parrain" placeholder="06 00 00 00 00" required></div>
             </div>
             <div style="height:1px; background:#eee; margin:20px 0;"></div>
             <div class="grid-2">
               <div><label>Nom de votre proche *</label><input type="text" name="nom_proche" required></div>
-              <div><label>Téléphone de votre proche *</label><input type="tel" name="tel_proche" required></div>
+              <div><label>Téléphone de votre proche *</label><input type="tel" name="tel_proche" placeholder="06 00 00 00 00" required></div>
             </div>
             
             <div class="rgpd-container">
@@ -121,11 +121,10 @@
         </div>
 
         <div id="filleul" class="form-panel">
-          <form action="https://formspree.io/f/xojpdlkn" method="POST>
-            <input type="hidden" name="_next" value="parrainage-succes.html">
+          <form id="form-filleul" action="https://formspree.io/f/xojpdlkn" method="POST">
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom" required></div>
-              <div><label>Votre Téléphone *</label><input type="tel" name="tel" required></div>
+              <div><label>Votre Téléphone *</label><input type="tel" name="tel" placeholder="06 00 00 00 00" required></div>
             </div>
             <label>Qui vous a parrainé ? (Nom du client Echome) *</label>
             <input type="text" name="nom_du_parrain" required>
@@ -167,12 +166,73 @@
   </footer>
 
   <script>
+    // 1. GESTION DU CHANGEMENT DE FORMULAIRE
     function switchForm(id, el) {
       document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       el.classList.add('active');
     }
+
+    // 2. VALIDATION TELEPHONE ET ENVOI SANS RECHARGER (GRATUIT)
+    function validatePhone(phone) {
+      // Regex pour vérifier 10 chiffres commençant par 06 ou 07 (autorise les espaces)
+      const cleaned = phone.replace(/\s/g, ''); // On enlève les espaces pour compter
+      return /^(06|07)[0-9]{8}$/.test(cleaned);
+    }
+
+    const formIds = ["form-parrain", "form-filleul"];
+    
+    formIds.forEach(id => {
+      const form = document.getElementById(id);
+      if (!form) return;
+
+      form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // On bloque l'envoi classique
+        
+        const formData = new FormData(event.target);
+        
+        // On vérifie tous les champs de type "tel" présents dans le formulaire envoyé
+        let isPhoneValid = true;
+        form.querySelectorAll('input[type="tel"]').forEach(input => {
+          if (!validatePhone(input.value)) {
+            isPhoneValid = false;
+          }
+        });
+
+        if (!isPhoneValid) {
+          alert("Veuillez entrer un numéro de mobile valide commençant par 06 ou 07 (10 chiffres).");
+          return;
+        }
+
+        // Effet visuel sur le bouton
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerText = "Envoi en cours...";
+
+        // Envoi via AJAX (fetch)
+        try {
+          const response = await fetch(event.target.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // REDIRECTION MANUELLE VERS VOTRE PAGE SUCCÈS
+            window.location.href = "https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html";
+          } else {
+            alert("Erreur lors de l'envoi. Veuillez vérifier que votre boîte mail est confirmée sur Formspree.");
+            submitButton.disabled = false;
+            submitButton.innerText = "Valider";
+          }
+        } catch (error) {
+          alert("Erreur de connexion réseau.");
+          submitButton.disabled = false;
+          submitButton.innerText = "Valider";
+        }
+      });
+    });
   </script>
 </body>
 </html>
