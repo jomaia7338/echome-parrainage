@@ -1,69 +1,196 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Merci - EC(H)OME ENERGIES</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            /* On utilise les nouvelles couleurs de la version A-index */
-            --primary: #2D5AF0; 
-            --secondary: #F7C244; 
-            --dark: #1A1A1B; 
-        }
-        
-        body { font-family: 'Inter', sans-serif; background: #F8F9FA; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        
-        .card { background: white; padding: 60px; border-radius: 40px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.1); max-width: 550px; border: 1px solid #eee; }
-        
-        .logo { max-width: 180px; margin-bottom: 40px; }
-        
-        /* Le cercle de validation passe au BLEU */
-        .check { width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 30px; box-shadow: 0 10px 20px rgba(45, 90, 240, 0.2); }
-        
-        h1 { color: var(--dark); font-weight: 900; font-size: 2.5rem; margin: 0; }
-        
-        p { color: #555; font-size: 1.1rem; line-height: 1.6; margin: 20px 0 40px; }
-        
-        .reward-info { background: var(--dark); color: white; padding: 25px; border-radius: 20px; margin-bottom: 40px; }
-        
-        .reward-info span { font-size: 0.9rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Les montants passent au JAUNE */
-        .reward-info strong { display: block; color: var(--secondary); font-size: 1.6rem; margin-top: 5px; }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 15px; }
-        
-        .btn { padding: 18px 30px; text-decoration: none; border-radius: 12px; font-weight: 700; transition: 0.3s; text-align: center; }
-        
-        /* Bouton principal en BLEU */
-        .btn-primary { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(45, 90, 240, 0.2); }
-        .btn-primary:hover { transform: translateY(-3px); background: #1a42cc; }
-        
-        .btn-secondary { background: transparent; color: var(--dark); border: 2px solid #eee; }
-        .btn-secondary:hover { background: #f9f9f9; border-color: #ddd; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci - EC(H)OME ENERGIES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2D5AF0;
+      --secondary: #F7C244;
+      --dark: #1A1A1B;
+      --light-bg: #F8F9FA;
+      --shadow: 0 40px 100px rgba(0, 0, 0, 0.10);
+      --border: #EAEAEA;
+    }
 
-        @media (min-width: 480px) { .btn-group { flex-direction: row; justify-content: center; } }
-    </style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: var(--dark);
+    }
+
+    .card {
+      background: white;
+      padding: 60px;
+      border-radius: 40px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      max-width: 560px;
+      width: 100%;
+      border: 1px solid #eee;
+    }
+
+    .logo {
+      max-width: 180px;
+      margin: 0 auto 40px;
+      display: block;
+    }
+
+    .check {
+      width: 80px;
+      height: 80px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 30px;
+      box-shadow: 0 10px 20px rgba(45, 90, 240, 0.2);
+    }
+
+    h1 {
+      color: var(--dark);
+      font-weight: 900;
+      font-size: 2.4rem;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 20px 0 40px;
+    }
+
+    .reward-info {
+      background: var(--dark);
+      color: white;
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+
+    .reward-info span {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .reward-info strong {
+      display: block;
+      color: var(--secondary);
+      font-size: 1.6rem;
+      margin-top: 5px;
+    }
+
+    .reward-info small {
+      font-size: 0.8rem;
+      opacity: 0.65;
+      display: block;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 18px 30px;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.3s;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 20px rgba(45, 90, 240, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: #1a42cc;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--dark);
+      border: 2px solid #eee;
+    }
+
+    .btn-secondary:hover {
+      background: #f9f9f9;
+      border-color: #ddd;
+    }
+
+    @media (min-width: 480px) {
+      .btn-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 40px 24px;
+        border-radius: 28px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .check {
+        width: 70px;
+        height: 70px;
+        font-size: 34px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <img src="Echome-Energies-fond-blanc.jpg" alt="Logo EC(H)OME ENERGIES" class="logo">
-        
-        <div class="check">✓</div>
-        <h1>Demande validée !</h1>
-        <p>Votre recommandation a bien été transmise. Un conseiller va étudier le projet et vous recontacter sous 48h ouvrées.</p>
-        
-        <div class="reward-info">
-            <span>Rappel de l'avantage parrainage</span>
-            <strong>150€ ou 250€ par dossier</strong>
-            <small style="font-size: 0.8rem; opacity: 0.6; display: block; margin-top: 5px;">Selon la puissance installée finale</small>
-        </div>
+  <div class="card">
+    <img src="Echome-Energies-fond-blanc.jpg" alt="Logo EC(H)OME ENERGIES" class="logo">
 
-        <div class="btn-group">
-            <a href="index.html" class="btn btn-primary">Parrainer un autre proche</a>
-            <a href="https://echome-energies.fr" class="btn btn-secondary">Voir le site internet</a>
-        </div>
+    <div class="check">✓</div>
+
+    <h1>Demande validée&nbsp;!</h1>
+
+    <p>
+      Votre recommandation a bien été transmise. Un conseiller EC(H)OME ENERGIES
+      va étudier le projet et vous recontacter sous 48h ouvrées.
+    </p>
+
+    <div class="reward-info">
+      <span>Rappel de l'avantage parrainage</span>
+      <strong>150€ ou 250€ par dossier</strong>
+      <small>Montant attribué selon la puissance installée finale et sous réserve de validation du dossier.</small>
     </div>
+
+    <div class="btn-group">
+      <a href="index.html" class="btn btn-primary">Parrainer un autre proche</a>
+      <a href="https://echome-energies.fr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Voir le site internet</a>
+    </div>
+  </div>
 </body>
 </html>
