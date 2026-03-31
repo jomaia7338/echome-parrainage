@@ -8,12 +8,13 @@
   <style>
     :root {
       --primary: #2D5AF0; --secondary: #F7C244; --dark: #1A1A1B; 
-      --white: #FFFFFF; --light-bg: #F8F9FA; --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      --light-bg: #F8F9FA; --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background-color: var(--light-bg); color: var(--dark); line-height: 1.6; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
+    /* DESIGN HAUTE QUALITÉ */
     .hero {
       background: linear-gradient(rgba(45, 90, 240, 0.94), rgba(45, 90, 240, 0.94)),
                   url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1920&auto=format&fit=crop');
@@ -21,37 +22,37 @@
     }
     .logo-wrapper { background: white; padding: 25px 45px; border-radius: 24px; display: inline-block; margin-bottom: 40px; box-shadow: var(--shadow); }
     .logo-wrapper img { max-width: 260px; height: auto; display: block; }
-    
-    h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 15px; letter-spacing: -1.5px; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 15px; letter-spacing: -1.5px; line-height: 1.1; }
     h1 span { color: var(--secondary); }
-    .hero-note { font-size: 1.1rem; opacity: 0.9; margin-bottom: 40px; font-weight: 500; }
 
     .offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 30px; }
     .offer-card { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); padding: 45px; border-radius: 30px; }
-    .offer-card .price { display: block; font-size: 4rem; font-weight: 900; color: var(--secondary); line-height: 1; }
+    .offer-card .price { display: block; font-size: 4rem; font-weight: 900; color: var(--secondary); line-height: 1; margin-bottom: 10px; }
+    .offer-card .label { font-weight: 800; font-size: 1.2rem; text-transform: uppercase; }
 
+    /* SECTION FORMULAIRES */
     .section-forms { padding: 100px 0; margin-top: -100px; }
-    .form-container { background: white; max-width: 900px; margin: 0 auto; border-radius: 35px; padding: 60px; box-shadow: var(--shadow); border: 1px solid #eee; }
+    .form-container { background: white; max-width: 850px; margin: 0 auto; border-radius: 35px; padding: 50px; box-shadow: var(--shadow); border: 1px solid #eee; }
     
     .selector { display: flex; background: #f0f3f3; padding: 8px; border-radius: 20px; margin-bottom: 45px; }
     .tab { flex: 1; text-align: center; padding: 20px; border-radius: 15px; cursor: pointer; font-weight: 800; color: #666; transition: 0.3s; }
-    .tab.active { background: var(--primary); color: white; }
+    .tab.active { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(45, 90, 240, 0.2); }
     
     .form-panel { display: none; }
     .form-panel.active { display: block; animation: fadeIn 0.5s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-    label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; }
-    input { width: 100%; padding: 18px; border: 2px solid #f0f0f0; border-radius: 14px; margin-bottom: 25px; font-size: 1rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 700; color: #444; }
+    input { width: 100%; padding: 16px; border: 2px solid #f0f0f0; border-radius: 12px; margin-bottom: 20px; font-size: 1rem; }
+    input:focus { border-color: var(--primary); outline: none; background: #f9fbff; }
     
-    .btn-submit { width: 100%; background: var(--primary); color: white; padding: 24px; border-radius: 18px; border: none; font-size: 1.25rem; font-weight: 900; cursor: pointer; transition: 0.3s; box-shadow: 0 15px 30px rgba(45, 90, 240, 0.2); text-transform: uppercase; }
-    .btn-submit:hover { background: #1a42cc; transform: translateY(-3px); }
+    .btn-submit { width: 100%; background: var(--primary); color: white; padding: 22px; border-radius: 15px; border: none; font-size: 1.2rem; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+    .btn-submit:hover { background: #1a42cc; transform: translateY(-2px); }
 
     footer { background: #fff; padding: 80px 0; border-top: 1px solid #eee; font-size: 0.95rem; color: #666; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
     footer h4 { color: var(--dark); margin-bottom: 20px; font-weight: 900; }
-    .copyright { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #eee; }
   </style>
 </head>
 <body>
@@ -60,7 +61,6 @@
     <div class="container">
       <div class="logo-wrapper"><img src="Echome-Energies-fond-blanc.jpg" alt="Logo"></div>
       <h1>Jusqu'à <span>250€</span> pour vous,<br>jusqu'à <span>250€</span> pour votre proche</h1>
-      <p class="hero-note">Offre soumise à conditions — avantages calculés sur la puissance finale installée.</p>
       <div class="offer-grid">
         <div class="offer-card"><span class="price">150€</span><span class="label">Installation < 6 kWc</span></div>
         <div class="offer-card"><span class="price">250€</span><span class="label">Installation ≥ 6 kWc</span></div>
@@ -72,21 +72,20 @@
     <div class="container">
       <div class="form-container">
         <div class="selector">
-          <div class="tab active" onclick="switchForm('parrain', this)">Je suis parrain (Client)</div>
-          <div class="tab" onclick="switchForm('filleul', this)">Je suis filleul (Recommandé)</div>
+          <div class="tab active" onclick="switchForm('parrain', this)">Je suis parrain</div>
+          <div class="tab" onclick="switchForm('filleul', this)">Je suis filleul</div>
         </div>
 
         <div id="parrain" class="form-panel active">
           <form action="https://formspree.io/f/xojpdlkn" method="POST">
             <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
             <div class="grid-2">
-              <div><label>Votre Nom & Prénom *</label><input type="text" name="nom_parrain" required></div>
-              <div><label>Votre Téléphone *</label><input type="tel" name="tel_parrain" placeholder="06 00 00 00 00" required></div>
+              <div><label>Votre Nom *</label><input type="text" name="nom_parrain" required></div>
+              <div><label>Votre Téléphone *</label><input type="tel" name="tel_parrain" required></div>
             </div>
-            <div style="height:1px; background:#eee; margin:20px 0;"></div>
             <div class="grid-2">
-              <div><label>Nom de votre proche *</label><input type="text" name="nom_proche" required></div>
-              <div><label>Téléphone de votre proche *</label><input type="tel" name="tel_proche" placeholder="06 00 00 00 00" required></div>
+              <div><label>Nom du proche *</label><input type="text" name="nom_proche" required></div>
+              <div><label>Tél du proche *</label><input type="tel" name="tel_proche" required></div>
             </div>
             <button type="submit" class="btn-submit">Valider le parrainage</button>
           </form>
@@ -96,12 +95,12 @@
           <form action="https://formspree.io/f/xojpdlkn" method="POST">
             <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
             <div class="grid-2">
-              <div><label>Votre Nom & Prénom *</label><input type="text" name="nom" required></div>
-              <div><label>Votre Téléphone *</label><input type="tel" name="tel" placeholder="06 00 00 00 00" required></div>
+              <div><label>Votre Nom *</label><input type="text" name="nom" required></div>
+              <div><label>Votre Téléphone *</label><input type="tel" name="tel" required></div>
             </div>
             <label>Qui vous a parrainé ? *</label>
-            <input type="text" name="nom_du_parrain" required style="margin-bottom: 20px;">
-            <button type="submit" class="btn-submit">Demander mon étude gratuite</button>
+            <input type="text" name="parrain" required>
+            <button type="submit" class="btn-submit">Demander mon étude</button>
           </form>
         </div>
       </div>
@@ -112,10 +111,8 @@
     <div class="container">
       <div class="footer-grid">
         <div><h4>EC(H)OME ENERGIES</h4><p>1159 rue de la Galandrine<br>38210 Saint-Quentin-sur-Isère</p></div>
-        <div><h4>Informations</h4><p>RCS Grenoble : 980 109 755<br>TVA : FR93980109755</p></div>
-        <div><h4>Contact</h4><p>04 76 37 34 62<br><a href="mailto:contact@echome-energies.fr">contact@echome-energies.fr</a></p></div>
+        <div><h4>Contact</h4><p>04 76 37 34 62<br>contact@echome-energies.fr</p></div>
       </div>
-      <p class="copyright">© 2026 EC(H)OME ENERGIES — <a href="reglement-parrainage-Echome-Energies.pdf" target="_blank">Règlement complet</a></p>
     </div>
   </footer>
 
@@ -126,23 +123,6 @@
       document.getElementById(id).classList.add('active');
       el.classList.add('active');
     }
-
-    // GESTIONNAIRE DE REDIRECTION (Version sécurisée)
-    document.querySelectorAll('form').forEach(form => {
-      form.onsubmit = function() {
-        const btn = form.querySelector('.btn-submit');
-        btn.disabled = true;
-        btn.innerText = "Envoi en cours...";
-        
-        // On laisse le formulaire partir normalement vers Formspree.
-        // Si Formspree ne redirige pas, l'utilisateur a au moins validé son action.
-        setTimeout(() => {
-           // Si après 2 secondes on est encore sur la page, on force la redirection manuelle
-           // Cela évite de rester bloqué sur Formspree.
-           window.location.href = "https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html";
-        }, 3000); 
-      };
-    });
   </script>
 </body>
 </html>
