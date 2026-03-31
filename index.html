@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2D5AF0; /* Bleu de la version A */
-      --secondary: #F7C244; /* Jaune de la version A */
+      --primary: #2D5AF0; /* Bleu premium */
+      --secondary: #F7C244; /* Jaune action */
       --dark: #1A1A1B; 
       --white: #FFFFFF;
       --light-bg: #F8F9FA;
@@ -71,7 +71,7 @@
     .feature-card { background: var(--light-bg); padding: 40px; border-radius: 20px; border: 1px solid #eee; transition: 0.3s; text-align: center; }
     .feature-card h3 { color: var(--primary); margin-bottom: 15px; font-weight: 800; }
 
-    /* FOOTER (Version a-index) */
+    /* FOOTER */
     footer { border-top: 1px solid var(--border); background: #fff; color: #666; padding: 64px 0; font-size: 0.9rem; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
     footer h4 { color: var(--dark); margin-bottom: 15px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; }
@@ -114,7 +114,7 @@
         </div>
 
         <div id="parrain" class="form-panel active">
-          <form action="https://formspree.io/f/xojpdlkn" method="POST" id="form-p">
+          <form action="https://formspree.io/f/xojpdlkn" method="POST">
             <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom_parrain" required></div>
@@ -136,7 +136,7 @@
         </div>
 
         <div id="filleul" class="form-panel">
-          <form action="https://formspree.io/f/xojpdlkn" method="POST" id="form-f">
+          <form action="https://formspree.io/f/xojpdlkn" method="POST">
             <input type="hidden" name="_next" value="https://jomaia7338.github.io/echome-parrainage/parrainage-succes.html">
             <div class="grid-2">
               <div><label>Votre Nom & Prénom *</label><input type="text" name="nom" required></div>
@@ -177,7 +177,6 @@
           <p>38210 Saint-Quentin-sur-Isère</p>
           <p><strong>04 76 37 34 62</strong></p>
         </div>
-
         <div>
           <h4>Informations légales</h4>
           <p>SAS au capital de 20 000 €</p>
@@ -185,7 +184,6 @@
           <p>TVA : FR93980109755</p>
           <p>Garantie décennale & RGE Qualit'EnR</p>
         </div>
-
         <div>
           <h4>Protection des données</h4>
           <p>Responsable du traitement : EC(H)OME ENERGIES</p>
@@ -195,7 +193,6 @@
           </p>
         </div>
       </div>
-
       <p class="copyright">
         © 2026 EC(H)OME ENERGIES — 
         <a href="reglement-parrainage-Echome-Energies.pdf" target="_blank">Voir le règlement complet</a>
@@ -211,7 +208,7 @@
       el.classList.add('active');
     }
 
-    // Sécurité Téléphone
+    // Validation du téléphone (Méthode Classique)
     document.querySelectorAll('form').forEach(form => {
       form.onsubmit = function(e) {
         const telInputs = form.querySelectorAll('input[type="tel"]');
