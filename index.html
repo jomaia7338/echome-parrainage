@@ -22,6 +22,7 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--light-bg);
@@ -29,11 +30,15 @@
       line-height: 1.6;
     }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
     .hero {
       background: linear-gradient(rgba(45, 90, 240, 0.92), rgba(45, 90, 240, 0.92)),
-                  url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1920&auto=format&fit=crop');
+        url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1920&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
       color: white;
@@ -168,6 +173,7 @@
     }
 
     .form-panel { display: none; }
+
     .form-panel.active {
       display: block;
       animation: fadeIn 0.5s ease;
@@ -399,7 +405,7 @@
 
         <div class="form-messages">
           <div id="fs-success" class="message-box success">
-            Votre demande a bien été transmise. Nous reviendrons vers vous dans les meilleurs délais.
+            Votre demande a bien été transmise.
           </div>
           <div id="fs-error" class="message-box error">
             Une erreur est survenue lors de l’envoi. Merci de vérifier les informations saisies puis de réessayer.
@@ -415,12 +421,12 @@
             <div class="grid-2">
               <div>
                 <label for="nom_parrain">Votre Nom & Prénom *</label>
-                <input type="text" id="nom_parrain" name="nom_parrain" required data-fs-field>
+                <input type="text" id="nom_parrain" name="nom_parrain" required>
                 <span class="field-error" data-fs-error="nom_parrain"></span>
               </div>
               <div>
                 <label for="tel_parrain">Votre Téléphone *</label>
-                <input type="tel" id="tel_parrain" name="tel_parrain" placeholder="06 00 00 00 00" required data-fs-field>
+                <input type="tel" id="tel_parrain" name="tel_parrain" placeholder="06 00 00 00 00" required>
                 <span class="field-error" data-fs-error="tel_parrain"></span>
               </div>
             </div>
@@ -428,7 +434,7 @@
             <div class="grid-2">
               <div>
                 <label for="email_parrain">Votre Email *</label>
-                <input type="email" id="email_parrain" name="email_parrain" required data-fs-field>
+                <input type="email" id="email_parrain" name="email_parrain" required>
                 <span class="field-error" data-fs-error="email_parrain"></span>
               </div>
               <div></div>
@@ -439,12 +445,12 @@
             <div class="grid-2">
               <div>
                 <label for="nom_proche">Nom de votre proche *</label>
-                <input type="text" id="nom_proche" name="nom_proche" required data-fs-field>
+                <input type="text" id="nom_proche" name="nom_proche" required>
                 <span class="field-error" data-fs-error="nom_proche"></span>
               </div>
               <div>
                 <label for="tel_proche">Téléphone de votre proche *</label>
-                <input type="tel" id="tel_proche" name="tel_proche" placeholder="06 00 00 00 00" required data-fs-field>
+                <input type="tel" id="tel_proche" name="tel_proche" placeholder="06 00 00 00 00" required>
                 <span class="field-error" data-fs-error="tel_proche"></span>
               </div>
             </div>
@@ -452,7 +458,7 @@
             <div class="grid-2">
               <div>
                 <label for="email_proche">Email de votre proche</label>
-                <input type="email" id="email_proche" name="email_proche" data-fs-field>
+                <input type="email" id="email_proche" name="email_proche">
                 <span class="field-error" data-fs-error="email_proche"></span>
               </div>
               <div></div>
@@ -460,13 +466,13 @@
 
             <div class="rgpd-container">
               <label class="rgpd-label" for="rgpd_consent_p">
-                <input type="checkbox" id="rgpd_consent_p" name="rgpd_consent" required data-fs-field>
+                <input type="checkbox" id="rgpd_consent_p" name="rgpd_consent" required>
                 <span>Je confirme avoir l'accord de mon proche pour transmettre ses coordonnées et j'accepte la politique de confidentialité d'EC(H)OME ENERGIES.</span>
               </label>
               <span class="field-error" data-fs-error="rgpd_consent"></span>
             </div>
 
-            <button type="submit" class="btn-submit" data-fs-submit-btn>Valider le parrainage</button>
+            <button type="submit" class="btn-submit">Valider le parrainage</button>
           </form>
         </div>
 
@@ -479,12 +485,12 @@
             <div class="grid-2">
               <div>
                 <label for="nom">Votre Nom & Prénom *</label>
-                <input type="text" id="nom" name="nom" required data-fs-field>
+                <input type="text" id="nom" name="nom" required>
                 <span class="field-error" data-fs-error="nom"></span>
               </div>
               <div>
                 <label for="tel">Votre Téléphone *</label>
-                <input type="tel" id="tel" name="tel" placeholder="06 00 00 00 00" required data-fs-field>
+                <input type="tel" id="tel" name="tel" placeholder="06 00 00 00 00" required>
                 <span class="field-error" data-fs-error="tel"></span>
               </div>
             </div>
@@ -492,25 +498,25 @@
             <div class="grid-2">
               <div>
                 <label for="email">Votre Email *</label>
-                <input type="email" id="email" name="email" required data-fs-field>
+                <input type="email" id="email" name="email" required>
                 <span class="field-error" data-fs-error="email"></span>
               </div>
               <div></div>
             </div>
 
             <label for="nom_du_parrain">Qui vous a parrainé ? (Nom du client Echome) *</label>
-            <input type="text" id="nom_du_parrain" name="nom_du_parrain" required data-fs-field>
+            <input type="text" id="nom_du_parrain" name="nom_du_parrain" required>
             <span class="field-error" data-fs-error="nom_du_parrain"></span>
 
             <div class="rgpd-container">
               <label class="rgpd-label" for="rgpd_consent_f">
-                <input type="checkbox" id="rgpd_consent_f" name="rgpd_consent" required data-fs-field>
+                <input type="checkbox" id="rgpd_consent_f" name="rgpd_consent" required>
                 <span>J'accepte que mes données soient traitées par EC(H)OME ENERGIES pour la gestion de ma demande de parrainage.</span>
               </label>
               <span class="field-error" data-fs-error="rgpd_consent"></span>
             </div>
 
-            <button type="submit" class="btn-submit" data-fs-submit-btn>Demander mon étude gratuite</button>
+            <button type="submit" class="btn-submit">Demander mon étude gratuite</button>
           </form>
         </div>
       </div>
@@ -574,6 +580,7 @@
 
   <script>
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xojpdlkn";
+    const SUCCESS_PAGE = "parrainage-succes.html";
 
     function switchForm(id, el) {
       document.querySelectorAll('.form-panel').forEach(panel => panel.classList.remove('active'));
@@ -594,13 +601,6 @@
       errorBox.textContent = "Une erreur est survenue lors de l’envoi. Merci de vérifier les informations saisies puis de réessayer.";
     }
 
-    function showSuccess(message) {
-      const box = document.getElementById('fs-success');
-      box.textContent = message;
-      box.style.display = 'block';
-      document.getElementById('fs-error').style.display = 'none';
-    }
-
     function showError(message) {
       const box = document.getElementById('fs-error');
       box.textContent = message;
@@ -609,7 +609,7 @@
     }
 
     function clearFormErrors(form) {
-      form.querySelectorAll('[data-fs-field]').forEach(field => {
+      form.querySelectorAll('input').forEach(field => {
         field.removeAttribute('aria-invalid');
       });
 
@@ -670,18 +670,14 @@
           return;
         }
 
-        if (type === 'email' && input.value.trim()) {
-          if (!input.checkValidity()) {
-            setFieldError(form, input.name, "Veuillez saisir une adresse email valide.");
-            isValid = false;
-          }
+        if (type === 'email' && input.value.trim() && !input.checkValidity()) {
+          setFieldError(form, input.name, "Veuillez saisir une adresse email valide.");
+          isValid = false;
         }
 
-        if (type === 'tel' && input.value.trim()) {
-          if (!isValidFrenchPhone(input.value)) {
-            setFieldError(form, input.name, "Veuillez saisir un numéro français valide.");
-            isValid = false;
-          }
+        if (type === 'tel' && input.value.trim() && !isValidFrenchPhone(input.value)) {
+          setFieldError(form, input.name, "Veuillez saisir un numéro français valide.");
+          isValid = false;
         }
       });
 
@@ -703,7 +699,7 @@
         return;
       }
 
-      const submitBtn = form.querySelector('[data-fs-submit-btn]');
+      const submitBtn = form.querySelector('.btn-submit');
       submitBtn.disabled = true;
 
       try {
@@ -720,8 +716,7 @@
         if (response.ok) {
           form.reset();
           clearFormErrors(form);
-          showSuccess("Votre demande a bien été transmise. Un conseiller vous recontactera prochainement.");
-          document.querySelector('.section-forms').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.location.href = SUCCESS_PAGE;
           return;
         }
 
@@ -743,6 +738,7 @@
         } else {
           showError("Une erreur est survenue lors de l’envoi. Merci de réessayer.");
         }
+
       } catch (error) {
         showError("Impossible d’envoyer le formulaire pour le moment. Vérifiez votre connexion puis réessayez.");
       } finally {
